@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>Bleach Space</title>
+        <script type="text/javascript" src="js/Entidad.js"></script>
+        <script type="text/javascript" src="js/EntidadNave.js"></script>
+        <script type="text/javascript" src="js/EntidadDisparo.js"></script>
+        <script type="text/javascript" src="js/EntidadAsteroide.js"></script>
+        <script type="text/javascript" src="js/BasuraEspacial.js"></script>
+        <script type="text/javascript" src="js/Sprites.js"></script>
+        <script type="text/javascript" src="js/Juego.js"></script>
+        <script>
+            var temporizador;
+            var juego;
+            function inicio(){
+                juego = new Juego();
+                juego.constructor("idcanvas");
+                temporizador=setInterval("juego.controlLoop();",25);
+            }
+            document.onkeydown=function(e){
+                juego.pulsarTecla(e);
+            };
+            document.onkeyup=function(e){
+                juego.soltarTecla(e);
+            };
+            function log(texto,nueva){
+                var capa=document.getElementById("log");
+                if (nueva)
+                    capa.innerHTML+="<br/>"+texto;
+                else
+                    capa.innerHTML=texto;
+            }
+            function parar(){
+                clearInterval(temporizador);
+            }
+        </script>
+    </head>
+
+    <body onload="inicio();">
+        <canvas id="idcanvas"></canvas>
+        <div></div>
+        <button onclick="parar();">Parar</button>
+        <div id="log"></div>
+        
+    </body>
+</html>
